@@ -19,55 +19,39 @@ public class JDBCController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/printAllUsers", method = RequestMethod.GET)
-    public String printAllUsers() {
+    @SuppressWarnings("SqlResolve")
+    @RequestMapping(value = "/printAllAlumni", method = RequestMethod.GET)
+    public String printAllAlumni() {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
         StringBuilder resultStr = new StringBuilder();
 
-        String queryStr = "SELECT * from user_info;";
+        String queryStr = "SELECT * from alumni_info;";
         SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(queryStr);
         while (sqlRowSet.next()) {
-            resultStr.append(sqlRowSet.getString("user_id")).append(", ")
-                    .append(sqlRowSet.getString("first_name")).append(", ")
-                    .append(sqlRowSet.getString("last_name")).append(", ")
+            resultStr.append(sqlRowSet.getString("alumni_id")).append(", ")
+                    .append(sqlRowSet.getString("name")).append(", ")
                     .append(sqlRowSet.getString("addr")).append(", ")
-                    .append(sqlRowSet.getString("phone")).append(", ")
                     .append(sqlRowSet.getString("email")).append(", ")
+                    .append(sqlRowSet.getString("graduation_year")).append(", ")
                     .append(sqlRowSet.getString("created_at"))
                     .append("\n");
         }
-        return ("SELECT * from user_info:\n" + resultStr);
+        return ("SELECT * from alumni_info:\n" + resultStr);
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@RequestBody AddUserData addUserData) {
+    @SuppressWarnings("SqlResolve")
+    @RequestMapping(value = "/addAlumni", method = RequestMethod.POST)
+    public String addUser(@RequestBody AddAlumniData addAlumniData) {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
-        String queryStr = "INSERT INTO user_info (first_name, last_name, addr, email) " +
+        String queryStr = "INSERT INTO alumni_info (name, addr, email, graduation_year) " +
                 "VALUES (" +
-                "'" + addUserData.getFirstName() + "'," +
-                "'" + addUserData.getLastName() + "'," +
-                "'" + addUserData.getAddress() + "'," +
-                "'" + addUserData.getEmail() + "'" +
+                "'" + addAlumniData.getName() + "'," +
+                "'" + addAlumniData.getAddress() + "'," +
+                "'" + addAlumniData.getEmail() + "'," +
+                "'" + addAlumniData.getGraduation_year() + "'" +
                 ");";
         int rowsUpdated = jdbcTemplate.update(queryStr);
         return ("Rows updated: " + rowsUpdated);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/printAllAccts", method = RequestMethod.GET)
-    public String printAllAccts() {
-        JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
-        StringBuilder resultStr = new StringBuilder();
-
-        String queryStr = "SELECT * from acct_info;";
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(queryStr);
-        while (sqlRowSet.next()) {
-            resultStr.append(sqlRowSet.getString("user_id")).append(", ")
-                    .append(sqlRowSet.getString("acct_num")).append(", ")
-                    .append(sqlRowSet.getString("balance"))
-                    .append("\n");
-        }
-        return ("SELECT * from acct_info:\n" + resultStr);
     }
 }
