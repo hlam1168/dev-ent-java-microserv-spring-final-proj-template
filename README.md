@@ -1,4 +1,5 @@
 Print All Alumni
+
 Returns data about all alumni from the query "SELECT * from alumni_info".
 
 URL
@@ -32,6 +33,7 @@ curl http://ec2-52-36-59-1.us-west-2.compute.amazonaws.com:8080/spring-proj-temp
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 Add Alumni
+
 Returns data about all alumni from the query "SELECT * from alumni_info".
 
 URL
