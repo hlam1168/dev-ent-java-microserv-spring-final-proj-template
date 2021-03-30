@@ -16,15 +16,11 @@ None
 
 ##### Data Params
 
-Required: 
-
-name: name of the alumni up to 255 characters to be added 
-
-address: address of the alumni up to 255 characters 
-
-email: email address of the alumni up to 50 characters 
-
-graduation_year: year of graduation in 4-digit decimal
+Required: <br>
+name: name of the alumni up to 255 characters to be added<br>
+address: address of the alumni up to 255 characters<br>
+email: email address of the alumni up to 50 characters<br>
+graduation_year: year of graduation in 4-digit decimal<br>
 
 ### Success Response:
 
